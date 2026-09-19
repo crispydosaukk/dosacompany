@@ -1,0 +1,51 @@
+import React from 'react';
+import type { Metadata, Viewport } from 'next';
+import { Plus_Jakarta_Sans, IBM_Plex_Mono } from 'next/font/google';
+import '../styles/tailwind.css';
+import { Toaster } from 'sonner';
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-plus-jakarta-sans',
+  display: 'swap',
+});
+
+const ibmPlexMono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-ibm-plex-mono',
+  display: 'swap',
+});
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+};
+
+export const metadata: Metadata = {
+  title: 'Dosa Company — Order From Your Table',
+  description: 'Order delicious South Indian vegetarian food directly from your table at Dosa Company, Milton Keynes & Tolworth.',
+  icons: {
+    icon: [{ url: '/favicon.ico', type: 'image/x-icon' }],
+  },
+  openGraph: {
+    title: 'Dosa Company — Order From Your Table',
+    description: 'Scan your table QR code to browse our full South Indian menu and pay securely online.',
+    url: 'https://dosacompany.co.uk',
+    siteName: 'Dosa Company',
+  },
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
+  return (
+    <html lang="en" className={`${plusJakartaSans.variable} ${ibmPlexMono.variable}`}>
+      <body className={plusJakartaSans.className}>
+        {children}
+        <Toaster position="bottom-right" richColors />
+</body>
+    </html>
+  );
+}
