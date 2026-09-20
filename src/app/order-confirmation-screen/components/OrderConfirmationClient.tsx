@@ -1,9 +1,10 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { CheckCircle2, Clock, ChefHat, Utensils, RotateCcw, Copy, Check } from 'lucide-react';
+import { CheckCircle2, Clock, ChefHat, Utensils, RotateCcw, Copy, Check, LayoutDashboard } from 'lucide-react';
 import AppLogo from '@/components/ui/AppLogo';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { formatPrice } from '@/lib/menuData';
 import { toast } from 'sonner';
 
@@ -121,12 +122,24 @@ export default function OrderConfirmationClient() {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="bg-white border-b border-border">
-        <div className="max-w-2xl mx-auto px-4 py-3 flex items-center gap-2">
-          <AppLogo size={32} />
-          <div>
-            <div className="font-bold text-foreground text-sm">Dosa Company</div>
-            <div className="text-xs text-muted-foreground">Order Confirmation</div>
+        <div className="max-w-2xl mx-auto px-4 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <AppLogo size={32} />
+            <div>
+              <div className="font-bold text-foreground text-sm">Dosa Company</div>
+              <div className="text-xs text-muted-foreground">Order Confirmation</div>
+            </div>
           </div>
+          <Link
+            href="/admin-dashboard"
+            id="confirmation-admin-dashboard-link"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-neutral-900 text-white hover:bg-neutral-800 transition-all duration-150 shadow-sm active:scale-95 border border-neutral-700/60"
+            title="Access Admin Dashboard"
+            aria-label="Admin Dashboard"
+          >
+            <LayoutDashboard size={14} className="text-secondary" />
+            <span>Admin</span>
+          </Link>
         </div>
       </header>
 

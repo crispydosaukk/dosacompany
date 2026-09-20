@@ -351,7 +351,7 @@ export default function MenuManagementClient() {
                         <div>
                           <div className="flex items-center gap-2">
                             <p className="font-bold text-admin-foreground text-sm">{item.name}</p>
-                            <Leaf size={12} className="text-green-500 flex-shrink-0" title="Vegetarian" />
+                            <span title="Vegetarian"><Leaf size={12} className="text-green-500 flex-shrink-0" /></span>
                           </div>
                           <p className="text-admin-muted text-xs truncate max-w-[200px]">{item.description}</p>
                           <div className="flex items-center gap-1.5 mt-1">

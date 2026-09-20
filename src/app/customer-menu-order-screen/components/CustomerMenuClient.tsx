@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useCallback } from 'react';
-import { Search, ShoppingCart, ChevronRight, X, Plus, Info } from 'lucide-react';
+import { Search, ShoppingCart, ChevronRight, X, Plus, Info, LayoutDashboard } from 'lucide-react';
 import AppLogo from '@/components/ui/AppLogo';
 import AppImage from '@/components/ui/AppImage';
 import { MENU_CATEGORIES, MENU_ITEMS, MenuItem, formatPrice } from '@/lib/menuData';
@@ -9,6 +9,7 @@ import { CartItem, CartModifier, getCartTotal } from '@/lib/cartStore';
 import ItemCustomisationModal from './ItemCustomisationModal';
 import CartDrawer from './CartDrawer';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const TABLE_NUMBER = 1; // Backend integration: resolve from QR token /order/t/{token}
 
@@ -19,7 +20,7 @@ export default function CustomerMenuClient() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
   const [cartOpen, setCartOpen] = useState(false);
-  const categoryRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const categoryRefs = useRef<Record<string, HTMLElement | null>>({});
 
   const filteredItems = MENU_ITEMS.filter((item) => {
     const matchesSearch =
@@ -95,23 +96,35 @@ export default function CustomerMenuClient() {
                 </div>
               </div>
             </div>
-            <button
-              onClick={() => setCartOpen(true)}
-              className="relative flex items-center gap-2 bg-primary text-white rounded-xl px-4 py-2 font-semibold text-sm transition-all duration-150 hover:bg-red-700 active:scale-95"
-              aria-label="View cart"
-            >
-              <ShoppingCart size={18} />
-              {cartCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-secondary text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                  {cartCount}
-                </span>
-              )}
-              {cartCount > 0 ? (
-                <span>{formatPrice(cartTotal)}</span>
-              ) : (
-                <span>Cart</span>
-              )}
-            </button>
+            <div className="flex items-center gap-2">
+              <Link
+                href="/admin-dashboard"
+                id="navbar-admin-dashboard-link"
+                className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-neutral-900 text-white hover:bg-neutral-800 transition-all duration-150 shadow-sm active:scale-95 border border-neutral-700/60"
+                title="Access Admin Dashboard"
+                aria-label="Admin Dashboard"
+              >
+                <LayoutDashboard size={15} className="text-secondary" />
+                <span>Admin</span>
+              </Link>
+              <button
+                onClick={() => setCartOpen(true)}
+                className="relative flex items-center gap-2 bg-primary text-white rounded-xl px-4 py-2 font-semibold text-sm transition-all duration-150 hover:bg-red-700 active:scale-95"
+                aria-label="View cart"
+              >
+                <ShoppingCart size={18} />
+                {cartCount > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-secondary text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                    {cartCount}
+                  </span>
+                )}
+                {cartCount > 0 ? (
+                  <span>{formatPrice(cartTotal)}</span>
+                ) : (
+                  <span>Cart</span>
+                )}
+              </button>
+            </div>
           </div>
           {/* Search */}
           <div className="relative">

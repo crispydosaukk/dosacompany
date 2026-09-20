@@ -2,9 +2,10 @@
 
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { ArrowLeft, Shield, Lock, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
+import { ArrowLeft, Shield, Lock, CheckCircle2, AlertCircle, Loader2, LayoutDashboard } from 'lucide-react';
 import AppLogo from '@/components/ui/AppLogo';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { formatPrice } from '@/lib/menuData';
 import { CartItem, getCartSubtotal, getCartVAT, getCartTotal } from '@/lib/cartStore';
 import StripePaymentMock from './StripePaymentMock';
@@ -110,9 +111,21 @@ export default function CheckoutClient() {
               <div className="text-xs text-muted-foreground">Table {TABLE_NUMBER} · Dosa Company</div>
             </div>
           </div>
-          <div className="flex items-center gap-1.5 text-secondary">
-            <Lock size={14} />
-            <span className="text-xs font-semibold">Secure</span>
+          <div className="flex items-center gap-2">
+            <Link
+              href="/admin-dashboard"
+              id="checkout-admin-dashboard-link"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-neutral-900 text-white hover:bg-neutral-800 transition-all duration-150 shadow-sm active:scale-95 border border-neutral-700/60"
+              title="Access Admin Dashboard"
+              aria-label="Admin Dashboard"
+            >
+              <LayoutDashboard size={14} className="text-secondary" />
+              <span>Admin</span>
+            </Link>
+            <div className="flex items-center gap-1.5 text-secondary">
+              <Lock size={14} />
+              <span className="text-xs font-semibold">Secure</span>
+            </div>
           </div>
         </div>
       </header>
